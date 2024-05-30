@@ -94,24 +94,12 @@ class HomePage extends StatelessWidget {
             Flexible(
               flex: 8,
               child: InkWell(
-               onTap: () async {
-            bool status = await AuthSeviceImp().logIn(
-                authModel(username: username.text));
-            if (status) {
-              Navigator.push(
+               onTap: ()  {
+            Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) => CreateQuestion(),
                   ));
-            } else {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text("Failed to Log In"),
-                  backgroundColor: Colors.red,
-                  behavior: SnackBarBehavior.floating,
-                ),
-              );
-            }
           },
                 child: Container(
                   alignment: Alignment.center,

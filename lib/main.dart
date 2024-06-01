@@ -270,22 +270,7 @@ class CreateQuestion extends StatelessWidget {
   }
 }
 
-Future<List<QuestionModel>> getData() async {
-  Dio req = Dio();
-  List<QuestionModel> todos = [];
-  try {
-    Response res =
-        await req.get("https://6650d71420f4f4c442764720.mockapi.io/questions");
-    for (var i = 0; i < res.data.length; i++) {
-      QuestionModel todo = QuestionModel.fromMap(res.data[i]);
-      todos.add(todo);
-    }
-    return todos;
-  } catch (e) {
-    print(e);
-    return todos;
-  }
-}
+
 
 class Questions extends StatelessWidget {
   const Questions({super.key});
@@ -294,8 +279,8 @@ class Questions extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: FutureBuilder(
-          future: getData(),
+        child: FutureBuilder<List<QuestionModel>>(
+          future: QuestionServiceImp().getData(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return ListView.builder(

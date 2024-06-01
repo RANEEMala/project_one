@@ -17,7 +17,7 @@ class AuthSeviceImp extends AuthService {
   Future<bool> logIn(authModel user) async {
     try {
       response = await req.post(baseurl, data: user.toMap());
-      if (response.statusCode == 200) {
+      if (response.statusCode == 201) {
         core
             .get<SharedPreferences>()
             .setString('username', response.data['username']);

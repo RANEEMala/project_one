@@ -141,6 +141,19 @@ class CreateQuestion extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        actions: [ 
+           InkWell(
+            onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Questions(),
+                    ),
+                  );
+                },
+         child:  Icon(Icons.abc_rounded))],
+      ),
       body: Column(
         children: [
           Padding(
@@ -255,18 +268,9 @@ class CreateQuestion extends StatelessWidget {
               ));
             }
           },
-          child: InkWell(
-            onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => Questions(),
-                    ),
-                  );
-                },
+          
             
-            child: Icon(Icons.send))),
-    );
+            child: Icon(Icons.send)));
   }
 }
 
@@ -278,8 +282,7 @@ class Questions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: FutureBuilder<List<QuestionModel>>(
+      body:  FutureBuilder<List<QuestionModel>>(
           future: QuestionServiceImp().getData(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
@@ -296,7 +299,7 @@ class Questions extends StatelessWidget {
             }
           },
         ),
-      )
+      
     );
   }
 }

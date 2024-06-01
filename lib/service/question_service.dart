@@ -9,7 +9,7 @@ abstract class QuestionService {
 
   Future<bool> createNewQues(QuestionModel quiz);
 
-  Future<List<QuestionModel>> getAllQuiz();
+  Future<List<QuestionModel>> getData();
 }
 
   class QuestionServiceImp extends QuestionService {
@@ -29,8 +29,28 @@ abstract class QuestionService {
   }
 
   @override
-  Future<List<QuestionModel>> getAllQuiz() {
-    // TODO: impxlement getAllQuiz
-    throw UnimplementedError();
+  Future<List<QuestionModel>> getData() async {
+     List<QuestionModel> mylist = [];
+    try {
+      response = await dio.get(baseurl);
+      print(response.statusCode);
+
+      List<QuestionModel> mylist = List.generate(response.data.length,
+          (index) => QuestionModel.fromMap(response.data[index]));
+      print(response.statusCode);
+
+      if (response.statusCode == 200) {
+        print("listData");
+        return mylist;
+      } else {
+        print("listDataaa");
+
+        return mylist;
+      }
+    } on DioException catch (e) {
+      print(e.message);
+      return mylist;
+    }
   }
-}
+  }
+
